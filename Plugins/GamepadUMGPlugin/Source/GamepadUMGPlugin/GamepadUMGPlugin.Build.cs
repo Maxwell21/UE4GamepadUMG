@@ -5,6 +5,8 @@ public class GamepadUMGPlugin : ModuleRules
 {
     public GamepadUMGPlugin(ReadOnlyTargetRules Target) : base(Target)
     {
+        PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+
         PublicDependencyModuleNames.AddRange(
 			new string[] { 
 				"Core", 

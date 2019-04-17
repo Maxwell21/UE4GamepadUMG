@@ -1,7 +1,7 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 
-#include "GamepadUMG.h"
 #include "GamepadUMGCharacter.h"
+#include "GamepadUMG.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AGamepadUMGCharacter
@@ -44,27 +44,27 @@ AGamepadUMGCharacter::AGamepadUMGCharacter()
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void AGamepadUMGCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+void AGamepadUMGCharacter::SetupPlayerInputComponent(class UInputComponent* CharaInputComponent)
 {
 	// Set up gameplay key bindings
-	check(InputComponent);
-	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	check(CharaInputComponent);
+	CharaInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
+	CharaInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	InputComponent->BindAxis("MoveForward", this, &AGamepadUMGCharacter::MoveForward);
-	InputComponent->BindAxis("MoveRight", this, &AGamepadUMGCharacter::MoveRight);
+	CharaInputComponent->BindAxis("MoveForward", this, &AGamepadUMGCharacter::MoveForward);
+	CharaInputComponent->BindAxis("MoveRight", this, &AGamepadUMGCharacter::MoveRight);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
-	InputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	InputComponent->BindAxis("TurnRate", this, &AGamepadUMGCharacter::TurnAtRate);
-	InputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	InputComponent->BindAxis("LookUpRate", this, &AGamepadUMGCharacter::LookUpAtRate);
+	CharaInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+	CharaInputComponent->BindAxis("TurnRate", this, &AGamepadUMGCharacter::TurnAtRate);
+	CharaInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	CharaInputComponent->BindAxis("LookUpRate", this, &AGamepadUMGCharacter::LookUpAtRate);
 
 	// handle touch devices
-	InputComponent->BindTouch(IE_Pressed, this, &AGamepadUMGCharacter::TouchStarted);
-	InputComponent->BindTouch(IE_Released, this, &AGamepadUMGCharacter::TouchStopped);
+	CharaInputComponent->BindTouch(IE_Pressed, this, &AGamepadUMGCharacter::TouchStarted);
+	CharaInputComponent->BindTouch(IE_Released, this, &AGamepadUMGCharacter::TouchStopped);
 }
 
 

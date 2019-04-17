@@ -3,9 +3,9 @@
 	
 	Plugin created by Rama
 */
+#include "GameAnalogCursor.h"
 #include "GamepadUMGPluginPrivatePCH.h"
 #include "GamepadCursorSettings.h"
-#include "GameAnalogCursor.h"
 #include "WidgetLayoutLibrary.h"
 #include "Engine/UserInterfaceSettings.h"
 
@@ -22,6 +22,9 @@ void FGameAnalogCursor::EnableAnalogCursor(class APlayerController* PC, TSharedP
 {
 	if (PC)
 	{
+		//Clean unregistered input preprocessor
+		FGameAnalogCursor::DisableAnalogCursor(PC);
+
 		const float CursorRadius = GetDefault<UGamepadCursorSettings>()->GetAnalogCursorRadius();
 		TSharedPtr<FGameAnalogCursor> AnalogCursor = MakeShareable(new FGameAnalogCursor(PC, CursorRadius));
 		FSlateApplication::Get().RegisterInputPreProcessor(AnalogCursor);
